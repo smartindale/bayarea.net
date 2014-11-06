@@ -55,6 +55,7 @@
       <HintPath>..\..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -63,10 +64,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="EndpointConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Amazoom.Email.Contracts\Amazoom.Email.Contracts.csproj">
+      <Project>{68eb01d7-edfe-4846-a4ae-1e6d0425b6b8}</Project>
+      <Name>Amazoom.Email.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Amazoom.Orders.Contracts\Amazoom.Orders.Contracts.csproj">
+      <Project>{e98cc92b-d1b7-46c8-844d-642557a64991}</Project>
+      <Name>Amazoom.Orders.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Amazoom.Shipping.Contracts\Amazoom.Shipping.Contracts.csproj">
       <Project>{539519a9-fdce-4e38-a666-b64d50580d66}</Project>
       <Name>Amazoom.Shipping.Contracts</Name>

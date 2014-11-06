@@ -1,20 +1,18 @@
+﻿using NServiceBus;
+using NServiceBus.Installation.Environments;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Web;
 
-namespace Amazoom.Orders.Endpoint
+namespace Amazoom.Portal
 {
-    using NServiceBus;
-    using System;
-    using System.Configuration;
-
-	/*
-		This class configures this endpoint as a Server. More information about how to configure the NServiceBus host
-		can be found here: http://particular.net/articles/the-nservicebus-host
-	*/
-	public class EndpointConfig : IConfigureThisEndpoint, AsA_Publisher, IWantCustomInitialization
+    public class EndpointConfig
     {
-        public void Init()
+        public IBus Init()
         {
-            new Bootstrapper().BootstrapStructureMap();
-            Configure.With(AllAssemblies.Matching("AI.").And("Amazoom.").And("NServiceBus."))
+            return Configure.With(AllAssemblies.Matching("AI.").And("Amazoom.").And("NServiceBus."))
                  .StructureMapBuilder()
                  .UseTransport<Msmq>()
                  .UseNHibernateSagaPersister()
@@ -29,7 +27,10 @@ namespace Amazoom.Orders.Endpoint
                  .DefiningEncryptedPropertiesAs(pi => pi.Name.Contains("Secret"))
                  .DefiningExpressMessagesAs(pi => pi.Name.EndsWith("Express"))
                  .DefiningTimeToBeReceivedAs(t => t.Name.EndsWith("Expires") ? TimeSpan.FromSeconds(45) : TimeSpan.MaxValue)
-                 .RijndaelEncryptionService(); 
+                 .RijndaelEncryptionService()
+                 .UnicastBus()
+                 .CreateBus()
+                 .Start(()=> Configure.Instance.ForInstallationOn<Windows>().Install());
         }
     }
 }
