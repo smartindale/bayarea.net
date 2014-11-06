@@ -14,6 +14,14 @@ body {
     padding: 0;
 }
 
+.green{
+    color: green;
+}
+
+.blue{
+    color:blue;
+}
+
 a {
     color: #333;
     outline: none;

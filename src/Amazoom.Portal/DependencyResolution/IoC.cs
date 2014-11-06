@@ -21,6 +21,8 @@ using StructureMap;
 using StructureMap.Graph;
 namespace Amazoom.Portal.DependencyResolution {
     public static class IoC {
+
+        static IBus _bus;
         public static IContainer Initialize() {
             ObjectFactory.Initialize(x =>
                         {
@@ -29,8 +31,9 @@ namespace Amazoom.Portal.DependencyResolution {
                                         scan.TheCallingAssembly();
                                         scan.WithDefaultConventions();
                                     });
-                            x.For<IBus>()
-                                .Use(new EndpointConfig().Init());
+                            _bus = new EndpointConfig().Init();
+                            x.For<IBus>().Singleton().Use(_bus);
+                                
                         });
             return ObjectFactory.Container;
         }
