@@ -2,6 +2,7 @@
 namespace Amazoom.Shipping.Endpoint
 {
     using NServiceBus;
+    using NServiceBus.Logging;
     using System;
     using System.Configuration;
 

@@ -2,8 +2,9 @@
 namespace Amazoom.Email.Endpoint
 {
     using NServiceBus;
-    using System;
-    using System.Configuration;
+using NServiceBus.Logging;
+using System;
+using System.Configuration;
 
 	/*
 		This class configures this endpoint as a Server. More information about how to configure the NServiceBus host
@@ -11,7 +12,7 @@ namespace Amazoom.Email.Endpoint
 	*/
 	public class EndpointConfig : IConfigureThisEndpoint, AsA_Publisher,IWantCustomInitialization
     {
-        public void Init()
+         public void Init()
         {
             new Bootstrapper().BootstrapStructureMap();
             Configure.With(AllAssemblies.Matching("AI.").And("Amazoom.").And("NServiceBus."))
@@ -29,7 +30,7 @@ namespace Amazoom.Email.Endpoint
                  .DefiningEncryptedPropertiesAs(pi => pi.Name.Contains("Secret"))
                  .DefiningExpressMessagesAs(pi => pi.Name.EndsWith("Express"))
                  .DefiningTimeToBeReceivedAs(t => t.Name.EndsWith("Expires") ? TimeSpan.FromSeconds(45) : TimeSpan.MaxValue)
-                 .RijndaelEncryptionService(); 
+                 .RijndaelEncryptionService();
         }
     }
 }

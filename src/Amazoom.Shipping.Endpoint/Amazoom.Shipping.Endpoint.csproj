@@ -67,6 +67,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="EndpointConfig.cs" />
     <Compile Include="Handlers\OrderHandler.cs" />
+    <Compile Include="LogStartup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

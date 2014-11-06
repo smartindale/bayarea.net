@@ -2,6 +2,7 @@
 namespace Amazoom.Orders.Endpoint
 {
     using NServiceBus;
+    using NServiceBus.Logging;
     using System;
     using System.Configuration;
 
@@ -29,7 +30,7 @@ namespace Amazoom.Orders.Endpoint
                  .DefiningEncryptedPropertiesAs(pi => pi.Name.Contains("Secret"))
                  .DefiningExpressMessagesAs(pi => pi.Name.EndsWith("Express"))
                  .DefiningTimeToBeReceivedAs(t => t.Name.EndsWith("Expires") ? TimeSpan.FromSeconds(45) : TimeSpan.MaxValue)
-                 .RijndaelEncryptionService(); 
+                 .RijndaelEncryptionService();
         }
     }
 }
